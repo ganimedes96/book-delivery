@@ -5,7 +5,7 @@ export default {
   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
   collectCoverage: true,
   transform: {
-    '.+\\.ts$': 'ts-jest'
+    '^.+\\.(t|j)sx?$': ['@swc/jest']
   },
   coverageDirectory: 'coverage',
   testEnvironment: 'node',
