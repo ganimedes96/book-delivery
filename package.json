@@ -10,13 +10,16 @@
   },
   "lint-staged": {
     "src/**/*.ts": [
-      "npm run lint --fix"
+      "npm run lint --fix",
+      "npm run test:staged",
+      "git add"
     ]
   },
   "scripts": {
     "test": "jest",
     "prepare": "husky install",
-    "lint": "eslint src/**/*.ts"
+    "lint": "eslint src/**/*.ts",
+    "test:staged":"jest"
   },
   "keywords": [],
   "author": "",
