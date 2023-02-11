@@ -3,6 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "husky":{
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+    "npm run lint --fix"
+    ]
+  },
  
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
