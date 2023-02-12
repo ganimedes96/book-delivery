@@ -15,7 +15,7 @@
     ]
   },
   "scripts": {
-    "test": "jest --passWithNoTests",
+    "test": "jest --passWithNoTests --watch",
     "prepare": "husky install",
     "lint": "eslint src/**/*.ts",
     "test:staged":"jest --passWithNoTests"

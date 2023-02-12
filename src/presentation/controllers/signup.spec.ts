@@ -11,6 +11,7 @@ describe('SignUp Controller', () => {
       }
     }
     const httpResponse = sut.handleSignUp(httpRequest)
+    expect(httpResponse.body).toEqual(new Error('Name is required'))
     expect(httpResponse.statusCode).toBe(400)
   })
 })
