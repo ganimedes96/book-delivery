@@ -15,10 +15,10 @@
     ]
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "prepare": "husky install",
     "lint": "eslint src/**/*.ts",
-    "test:staged":"jest"
+    "test:staged":"jest --passWithNoTests"
   },
   "keywords": [],
   "author": "",
