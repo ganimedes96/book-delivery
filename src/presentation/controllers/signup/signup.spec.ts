@@ -1,7 +1,5 @@
-import { AccountModel } from '../../domain/model/account'
-import { AddAccount, AddAccountModel } from '../../domain/usecases/add-account'
-import { InvalidParamError, MissingParamError, ServerError } from '../errors'
-import { EmailValidator } from '../protocols'
+import { InvalidParamError, MissingParamError, ServerError } from '../../errors'
+import { EmailValidator, AddAccount, AddAccountModel, AccountModel } from './signup-protocols'
 import { SignUpController } from './signup.controller'
 
 interface SutTypes {
@@ -98,7 +96,9 @@ describe('SignUp Controller', () => {
     }
     const httpResponse = sut.handleSignUp(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new MissingParamError('PasswordConfirmation'))
+    expect(httpResponse.body).toEqual(
+      new MissingParamError('PasswordConfirmation')
+    )
   })
   it('Should return 400 if passwordConfirmation fails', () => {
     const { sut } = makeSut()
@@ -113,7 +113,9 @@ describe('SignUp Controller', () => {
     }
     const httpResponse = sut.handleSignUp(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new InvalidParamError('PasswordConfirmation'))
+    expect(httpResponse.body).toEqual(
+      new InvalidParamError('PasswordConfirmation')
+    )
   })
   it('Should return 400 if an invalid email is provided', () => {
     const { sut, emailValidatorStub } = makeSut()
