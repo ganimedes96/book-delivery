@@ -1,5 +1,5 @@
 TN:
-SF:src\utils\email-validator.ts
+SF:src\utils\email-validator-adapter.ts
 FN:4,get
 FN:5,isValid
 FNF:2
