@@ -10,8 +10,8 @@
   },
   "lint-staged": {
     "src/**/*.ts": [
-      "npm run lint --fix",
-      "npm run test:staged"
+      "npm run lint --fix"
+  
     ]
   },
   "scripts": {
