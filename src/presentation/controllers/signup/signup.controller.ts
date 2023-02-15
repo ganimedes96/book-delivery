@@ -27,10 +27,14 @@ export class SignUpController implements Controller {
       if (!httpRequest.body.password) {
         return badRequest(new MissingParamError('Password'))
       }
+      if (!httpRequest.body.role) {
+        return badRequest(new MissingParamError('Role'))
+      }
+
       if (!httpRequest.body.passwordConfirmation) {
         return badRequest(new MissingParamError('PasswordConfirmation'))
       }
-      const { password, passwordConfirmation, email, name } = httpRequest.body
+      const { password, passwordConfirmation, email, name, role } = httpRequest.body
       if (password !== passwordConfirmation) {
         return badRequest(new InvalidParamError('PasswordConfirmation'))
       }
@@ -41,7 +45,8 @@ export class SignUpController implements Controller {
       const account = await this.addAccount.add({
         name,
         email,
-        password
+        password,
+        role
       })
       return ok(account)
     } catch (error) {

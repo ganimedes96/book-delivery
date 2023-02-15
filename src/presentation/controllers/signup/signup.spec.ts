@@ -23,7 +23,8 @@ const makeAddAccount = (): AddAccount => {
         id: 'valid_id',
         name: 'valid_name',
         email: 'valid_email@email.com',
-        password: 'valid_password'
+        password: 'valid_password',
+        role: 'valid_role'
       }
       return await new Promise(resolve => { resolve(fakeAccount) })
     }
@@ -49,6 +50,7 @@ describe('SignUp Controller', () => {
       body: {
         email: 'any_email@email.com',
         password: 'any_password',
+        role: 'any_role',
         passwordConfirmation: 'any_password'
       }
     }
@@ -63,6 +65,7 @@ describe('SignUp Controller', () => {
       body: {
         name: 'any_name',
         password: 'any_password',
+        role: 'any_role',
         passwordConfirmation: 'any_password'
       }
     }
@@ -77,12 +80,28 @@ describe('SignUp Controller', () => {
       body: {
         name: 'any_name',
         email: 'any_email@email.com',
+        role: 'any_role',
         passwordConfirmation: 'any_password'
       }
     }
     const httpResponse = await sut.handleSignUp(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('Password'))
+  })
+  it('Should return 400 if no role is provided', async () => {
+    const { sut } = makeSut()
+
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'any_email@email.com',
+        password: 'any_password',
+        passwordConfirmation: 'any_password'
+      }
+    }
+    const httpResponse = await sut.handleSignUp(httpRequest)
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.body).toEqual(new MissingParamError('Role'))
   })
   it('Should return 400 if no passwordConfirmation is provided', async () => {
     const { sut } = makeSut()
@@ -91,7 +110,8 @@ describe('SignUp Controller', () => {
       body: {
         name: 'any_name',
         email: 'any_email@email.com',
-        password: 'any_password'
+        password: 'any_password',
+        role: 'any_role'
       }
     }
     const httpResponse = await sut.handleSignUp(httpRequest)
@@ -108,6 +128,7 @@ describe('SignUp Controller', () => {
         name: 'any_name',
         email: 'any_email@email.com',
         password: 'any_password',
+        role: 'any_role',
         passwordConfirmation: 'invalid_password'
       }
     }
@@ -125,6 +146,7 @@ describe('SignUp Controller', () => {
         name: 'any_name',
         email: 'invalid_email@email.com',
         password: 'any_password',
+        role: 'any_role',
         passwordConfirmation: 'any_password'
       }
     }
@@ -140,6 +162,7 @@ describe('SignUp Controller', () => {
         name: 'any_name',
         email: 'any_email@email.com',
         password: 'any_password',
+        role: 'any_role',
         passwordConfirmation: 'any_password'
       }
     }
@@ -154,6 +177,7 @@ describe('SignUp Controller', () => {
         name: 'any_name',
         email: 'any_email@email.com',
         password: 'any_password',
+        role: 'any_role',
         passwordConfirmation: 'any_password'
       }
     }
@@ -161,7 +185,8 @@ describe('SignUp Controller', () => {
     expect(addSpy).toHaveBeenCalledWith({
       name: 'any_name',
       email: 'any_email@email.com',
-      password: 'any_password'
+      password: 'any_password',
+      role: 'any_role'
     })
   })
   it('Should return 500 if EmailValidator throws', async () => {
@@ -175,6 +200,7 @@ describe('SignUp Controller', () => {
         name: 'any_name',
         email: 'invalid_email@email.com',
         password: 'any_password',
+        role: 'any_role',
         passwordConfirmation: 'any_password'
       }
     }
@@ -193,6 +219,7 @@ describe('SignUp Controller', () => {
         name: 'any_name',
         email: 'invalid_email@email.com',
         password: 'any_password',
+        role: 'any_role',
         passwordConfirmation: 'any_password'
       }
     }
@@ -208,6 +235,7 @@ describe('SignUp Controller', () => {
         name: 'valid_name',
         email: 'valid_email@email.com',
         password: 'valid_password',
+        role: 'valid_role',
         passwordConfirmation: 'valid_password'
       }
     }
@@ -217,7 +245,8 @@ describe('SignUp Controller', () => {
       id: 'valid_id',
       name: 'valid_name',
       email: 'valid_email@email.com',
-      password: 'valid_password'
+      password: 'valid_password',
+      role: 'valid_role'
     })
   })
 })
