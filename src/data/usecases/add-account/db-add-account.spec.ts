@@ -23,7 +23,8 @@ const makeAddAccountRepository = (): AddAccountRepository => {
         id: 'valid_id',
         name: 'valid_name',
         email: 'valid_email',
-        password: 'hashed_password'
+        password: 'hashed_password',
+        role: 'valid_role'
       }
       return await new Promise(resolve => { resolve(fakeAccount) })
     }
@@ -49,7 +50,8 @@ describe('DbAddAccount Usecase', () => {
     const accountData = {
       name: 'valid_name',
       email: 'valid_email',
-      password: 'valid_password'
+      password: 'valid_password',
+      role: 'valid_role'
     }
     await sut.add(accountData)
     expect(encryptSpy).toHaveBeenCalledWith('valid_password')
@@ -60,7 +62,8 @@ describe('DbAddAccount Usecase', () => {
     const accountData = {
       name: 'valid_name',
       email: 'valid_email',
-      password: 'valid_password'
+      password: 'valid_password',
+      role: 'valid_role'
     }
     const promise = sut.add(accountData)
     await expect(promise).rejects.toThrow()
@@ -71,13 +74,15 @@ describe('DbAddAccount Usecase', () => {
     const accountData = {
       name: 'valid_name',
       email: 'valid_email',
-      password: 'valid_password'
+      password: 'valid_password',
+      role: 'valid_role'
     }
     await sut.add(accountData)
     expect(addSpy).toHaveBeenCalledWith({
       name: 'valid_name',
       email: 'valid_email',
-      password: 'hashed_password'
+      password: 'hashed_password',
+      role: 'valid_role'
     })
   })
   it('Should throw if Encrypter throws', async () => {
@@ -86,7 +91,8 @@ describe('DbAddAccount Usecase', () => {
     const accountData = {
       name: 'valid_name',
       email: 'valid_email',
-      password: 'valid_password'
+      password: 'valid_password',
+      role: 'valid_role'
     }
     const promise = sut.add(accountData)
     await expect(promise).rejects.toThrow()
@@ -96,14 +102,16 @@ describe('DbAddAccount Usecase', () => {
     const accountData = {
       name: 'valid_name',
       email: 'valid_email',
-      password: 'valid_password'
+      password: 'valid_password',
+      role: 'valid_role'
     }
     const account = await sut.add(accountData)
     expect(account).toEqual({
       id: 'valid_id',
       name: 'valid_name',
       email: 'valid_email',
-      password: 'hashed_password'
+      password: 'hashed_password',
+      role: 'valid_role'
     })
   })
 })
