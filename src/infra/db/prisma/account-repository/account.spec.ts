@@ -16,7 +16,7 @@ describe('Account Prisma Repository', () => {
   it('Should return an account on success', async () => {
     const sut = makeSut()
     const account = {
-      id: '1',
+      id: '2',
       name: 'any_name',
       email: 'any_email@email.com',
       password: 'any_password',

@@ -10,6 +10,5 @@ export const makeSigUpController = (): SignUpController => {
   const bcryptAdapter = new BcryptAdapter(salt)
   const accountPrismaRepository = new AccountPrismaRepository()
   const dbAddAccount = new DbAddAccount(bcryptAdapter, accountPrismaRepository)
-  const signUpController = new SignUpController(emailValidatorAdapter, dbAddAccount)
-  return signUpController
+  return new SignUpController(emailValidatorAdapter, dbAddAccount)
 }

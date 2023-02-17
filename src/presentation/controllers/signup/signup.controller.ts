@@ -18,11 +18,11 @@ export class SignUpController implements Controller {
 
   async handleSignUp (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      if (!httpRequest.body.name) {
-        return badRequest(new MissingParamError('Name'))
-      }
       if (!httpRequest.body.email) {
         return badRequest(new MissingParamError('Email'))
+      }
+      if (!httpRequest.body.name) {
+        return badRequest(new MissingParamError('Name'))
       }
       if (!httpRequest.body.password) {
         return badRequest(new MissingParamError('Password'))
