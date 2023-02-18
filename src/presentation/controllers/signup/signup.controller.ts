@@ -1,4 +1,4 @@
-import { InvalidParamError, MissingParamError } from '../../errors'
+import { InvalidParamError, MissingParamError, UserAlreadyExist } from '../../errors'
 import { badRequest, ok, serverError } from '../../helpers/http-helper'
 import {
   HttpRequest,
@@ -7,7 +7,7 @@ import {
   EmailValidator,
   AddAccount
 } from './signup-protocols'
-
+import { PrismaClient } from '@prisma/client'
 export class SignUpController implements Controller {
   private readonly emailValidator: EmailValidator
   private readonly addAccount: AddAccount
@@ -42,6 +42,13 @@ export class SignUpController implements Controller {
       const isValid = this.emailValidator.isValid(email)
       if (!isValid) {
         return badRequest(new InvalidParamError('Email'))
+      }
+      const prisma = new PrismaClient()
+      const userAlreadyExist = await prisma.costumer.findUnique({ where: { email } })
+      console.log(userAlreadyExist)
+
+      if (userAlreadyExist?.email === email) {
+        return badRequest(new UserAlreadyExist('User'))
       }
       const account = await this.addAccount.add({
         name,

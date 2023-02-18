@@ -4,3 +4,10 @@ export class InvalidParamError extends Error {
     this.name = 'InvalidParamError'
   }
 }
+
+export class UserAlreadyExist extends Error {
+  constructor (paramName: string) {
+    super(`${paramName} already exists!`)
+    this.name = 'UserAlreadyExist'
+  }
+}
